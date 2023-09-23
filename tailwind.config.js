@@ -1,13 +1,27 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require("tailwindcss/colors");
+
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   theme: {
+    colors: {
+      ...colors,
+      uniPink: "#E80271",
+      uniPink2: "#BB3491",
+      uniPink3: "#854A9C",
+      uniDark: "#505292",
+      uniDark2: "#2F5078",
+      uniDark3: "#2F4858",
+      magicWallet: "#6851FF",
+      grayCard: "#FAFAFA",
+      grayCard2: "#F5F5F5",
+    },
     container: {
       center: true,
       padding: "2rem",
@@ -33,4 +47,4 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};
