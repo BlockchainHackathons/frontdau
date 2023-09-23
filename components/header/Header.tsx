@@ -28,13 +28,13 @@ const Header = () => {
         <div className=" col-span-1 center gap-6 center flex-row  ">
           <Link
             className={`flex gap-1 ${path.deposit && "text-uniPink"} `}
-            href={"/dashboard/deposit"}
+            href={"/deposit"}
           >
             <UserPlus /> Deposit
           </Link>
 
           <Link
-            href={"/dashboard/overview"}
+            href={"/overview"}
             className={`flex gap-1 ${path.overview && "text-uniPink"} `}
           >
             <Activity /> Overview
@@ -42,7 +42,7 @@ const Header = () => {
 
           <Link
             className={`flex gap-1 ${path.informations && "text-uniPink"} `}
-            href={"/dashboard/informations"}
+            href={"/informations"}
           >
             <UserPlus /> Infomations
           </Link>
