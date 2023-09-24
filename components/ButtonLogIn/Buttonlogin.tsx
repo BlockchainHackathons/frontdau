@@ -17,11 +17,12 @@ import Magic from "../../assets/logos/wallet/magic.svg";
 import Image from "next/image";
 import { useToast } from "../ui/use-toast";
 import { copyToClipboard } from "@/lib/helpers/global.helper";
+import { polygonMumbai } from "viem/chains";
 
 const ButtonLogIn = () => {
   const [open, setOpen] = useState(false);
   const { connect, connectors, isLoading, pendingConnector } = useConnect({
-    chainId: mainnet.id,
+    chainId: polygonMumbai.id,
     onSuccess() {
       setOpen(false);
     },

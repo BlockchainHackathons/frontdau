@@ -30,3 +30,5 @@ export type Position = {
   frequency: "DAILY" | "WEEKLY" | "MONTHLY" | undefined;
   indicator: "FEAR & GREAD" | "CBBI" | "RSI" | undefined;
 };
+
+export type Incide = 1 | 2 | 3;

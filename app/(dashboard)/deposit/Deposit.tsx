@@ -22,7 +22,6 @@ import {
   Token,
   TokenSell,
 } from "@/lib/types/global.type";
-import { useRouter } from "next/navigation";
 import { MoveRight } from "lucide-react";
 import USDClogo from "../../../assets/logos/tokens/USDC.svg";
 import DaiLogo from "../../../assets/logos/tokens/DAILogo.svg";
@@ -65,7 +64,6 @@ const Deposit = () => {
     frequency: undefined,
     indicator: undefined,
   });
-  console.log(position);
 
   return (
     <div className="center h-[calc(100vh-52px)]">

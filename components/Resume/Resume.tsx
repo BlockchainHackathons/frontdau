@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+import { BigNumber } from "bignumber.js";
+import React, { useEffect, useMemo } from "react";
 import {
   Dialog,
   DialogContent,
@@ -18,6 +20,9 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Button } from "../ui/button";
 import { Position } from "@/lib/types/global.type";
+import useApprove from "@/lib/hook/useApprove";
+import { useExecute } from "@/lib/hook/useExecute";
+import { useDeposit } from "@/lib/hook/useDeposit";
 
 type ResumeProps = {
   open: boolean;
@@ -25,6 +30,28 @@ type ResumeProps = {
   position: Position;
 };
 const Resume = ({ open, setOpen, position }: ResumeProps) => {
+  const amountBigInt = useMemo(() => {
+    const value = new BigNumber(position.amount);
+    const valueBigInt = value.times(new BigNumber(10).pow(18));
+    return valueBigInt;
+  }, [position]);
+  const { ApproveSuccess, writeApprove } = useApprove(amountBigInt.toNumber());
+
+  const { DepositSuccess, writeDeposit } = useDeposit(amountBigInt.toNumber());
+  const { SwapSuccess, writeSwap } = useExecute(3);
+
+  useEffect(() => {
+    if (ApproveSuccess) {
+      writeDeposit?.();
+    }
+  }, [ApproveSuccess]);
+
+  useEffect(() => {
+    if (DepositSuccess) {
+      setOpen(false);
+    }
+  }, [DepositSuccess]);
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
@@ -85,7 +112,14 @@ const Resume = ({ open, setOpen, position }: ResumeProps) => {
               </div>
             </CardContent>
             <CardFooter className=" justify-end">
-              <Button variant={"uni"}>Deposit</Button>
+              <Button
+                variant={"uni"}
+                onClick={() => {
+                  writeApprove?.();
+                }}
+              >
+                Deposit
+              </Button>
             </CardFooter>
           </DialogDescription>
         </DialogHeader>
