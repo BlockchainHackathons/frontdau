@@ -48,14 +48,12 @@ export const useGetParams = () => {
       setParams({
         balanceWallet: Number(data[0].result) / 10 ** 18,
         usersParams: {
-          depositedAmount: Number(data[1].result[0] / 10 ** 18),
+          depositedAmount: Number(data[1].result[0]) / 10 ** 18,
           depositTimestamp: Number(data[1].result[1]),
-          stablecoinBalance: Number(data[1].result[2] / 10 ** 18),
+          stablecoinBalance: Number(data[1].result[2]) / 10 ** 18,
           ethBalance: Number(data[1].result[3]),
         },
       });
-      console.log(params);
-      console.log(data);
     },
     enabled: isConnected,
     watch: true,

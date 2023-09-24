@@ -31,6 +31,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Resume from "@/components/Resume/Resume";
+import { useGetParams } from "@/lib/hook/useGetParams";
 
 const sellTokens: TokenSell[] = [
   {
@@ -64,6 +65,7 @@ const Deposit = () => {
     frequency: undefined,
     indicator: undefined,
   });
+  const { params } = useGetParams();
 
   return (
     <div className="center h-[calc(100vh-52px)]">
@@ -179,6 +181,7 @@ const Deposit = () => {
                             <Input
                               type="Amount"
                               placeholder="Amount"
+                              value={position.amount}
                               onChange={(e) => {
                                 setPosition({
                                   ...position,
@@ -186,10 +189,20 @@ const Deposit = () => {
                                 });
                               }}
                             />
-                            <Button type="submit">Max</Button>
+                            <Button
+                              type="button"
+                              onClick={() => {
+                                setPosition({
+                                  ...position,
+                                  amount: params.balanceWallet,
+                                });
+                              }}
+                            >
+                              Max
+                            </Button>
                           </div>
                           <div className="text-xs font-medium text-gray-400">
-                            Balance : 10 USDC
+                            Balance : {params.balanceWallet} {position.sell}
                           </div>
                         </div>
                       </div>
